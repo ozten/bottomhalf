@@ -26,4 +26,5 @@ Sane defaults inhibit spam, trolls, and reward your genuine audience.
 ## Project Design
 
 * [Goals](GOALS.md)
+* [50,000 foot overview][OVERVIEW.md]
 * [Value Proposition](VALUE_PROPOSITION.md)
