@@ -19,7 +19,7 @@ Sane defaults inhibit spam, trolls, and reward your genuine audience.
 
 ## Get Involved
 
-* **Click Watch** on [this Repo](https://github.com/ozten/bottomhalf)
+* **[Click Watch](https://github.com/ozten/bottomhalf#wrapper) on this project**
 * Read and comment on [Issues](https://github.com/ozten/bottomhalf/issues)
 * Fork and contribute!
 
