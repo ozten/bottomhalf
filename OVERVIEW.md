@@ -25,3 +25,10 @@ Commenters can delete a comment that they have previously created. They cannot e
 Comments will be stored "in the cloud". Commenters own the comments they've made in the past and can easily get the data. Website creators own all the comments made against their website and can easily get all of the data.
 
 A creator or website commenter **cannot** discover data about others outside of the current website. Example: Amy comments on a Pets blog. Jill looks at all the comments Amy has made in the past, to evaluate if she is a looney. Jill cannot discover that Amy also recently commented on a Physics blog.
+
+Be default, comments just work and their visual design picks up many of the elements of the page they are added too. For more control, the website creator can add BottomHalf specific CSS to control the look and feel. To override a limited set of other defaults (such as displaying the comments in reverse chronological order), they can define a JavaScript option before they add the <code>script</code> tag.
+
+    <script type="text/javascript">
+    var BottomHalfOptions = {reverseCron: true};
+    </script>
+    <script src="http://bottomhalf.org/comments.js" type="text/javascript"></script>
