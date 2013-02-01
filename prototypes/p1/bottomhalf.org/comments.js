@@ -41,6 +41,7 @@ var existingComments = [
 ];
 
 var ccss = '<style>';
+ccss += '.signinrequired { border: solid 1px grey; width: 300px; padding: 20px; margin: 0px 10px 10px; float: left;}';
 ccss += '.author { text-align: center; position: absolute; left: 0px; top: 0px; width: 140px; border: solid 1px grey;} ';
 //ccss += '.author img {margin-left: 30px; }';
 ccss += '.name { display: block; }';
@@ -51,7 +52,7 @@ ccss += '.reply { position: absolute; left: 150px; bottom: 10px; } ';
 ccss += '</style>';
 
 var chtml = '<div id="bottom-half-comment-form"><h3>Comments</h3><p>There are 4 comments. Join the conversation</p>';
-chtml += 'You must <bold>Sign in</bold> to leave a comment. <button>Sign in with an Email address</button>';
+chtml += '<div class="signinrequired">You must <bold>Sign in</bold> to leave a comment. <a href="#"><img src="http://localhost:8000/email_sign_in_blue.png" /></a></div>';
 chtml += '<form><textarea disabled="disabled"></textarea>';
 chtml += '<input type="submit" name="reply" value="Reply" /></form>';
 
