@@ -23,8 +23,14 @@
 <div id="welcomeback">
   <p>Welcome back, <div class="author"><img class="avatar" src="" /><a href="#" rel="nofollow" class="nolink"><span></span></a></div></p>
   <p><a id="edit-profile" href="#">Edit Profile</a></p>
+  <p>or <a id="logout" href="">Sign Out</a> to use a different profile.</p>
 </div>
-
+<div id="commentform">
+  <form>
+    <textarea rows="7" cols="40"></textarea>
+    <input type="submit" name="reply" value="Reply" /></form>
+    <br style="clear:both" />
+</div>
 
 <script src="js/jquery-1.7.1.js" type="text/javascript"></script>
 <script type='text/javascript' src='https://login.persona.org/include.js'></script>
@@ -77,7 +83,6 @@ window.authClient = new FirebaseAuthClient(chatRef, function(error, user) {
 $('#authrequired button').click(function (e) {
   window.authClient.login('persona');
 });
-
 $('#collectprofile button').click(function (e) {
   e.preventDefault();
   var id = $('#collectprofile input[name=id]').val();
@@ -99,25 +104,44 @@ $('#collectprofile button').click(function (e) {
     }
   });
 });
+
+function enableComments(should) {
+  if (should) {
+    $('#commentform textarea').removeAttr('readonly');
+    $('#commentform input').removeAttr('disabled');
+  } else {
+    $('#commentform textarea').attr('readonly', 'true')
+    $('#commentform input').attr('disabled', 'disabled');
+console.log('setup', $('#commentform textarea'));
+  }
+}
 function showAuthRequired() {
   $('#authrequired').show();
   $('#collectprofile').hide();
   $('#welcomeback').hide();
+  enableComments(false);
 }
 function showCollectProfile() {
   $('#authrequired').hide();
   $('#collectprofile').show();
   $('#welcomeback').hide();
+  enableComments(false);
 }
 function showWelcomeBack() {
   $('#authrequired').hide();
   $('#collectprofile').hide();
   $('#welcomeback').show();
+  enableComments(true);
 }
 
 $('#edit-profile').click(function(e) {
   e.preventDefault();
   showCollectProfile();
+});
+
+$('#logout').click(function(e) {
+  e.preventDefault();
+  authClient.logout();
 });
 
 var myRootRef = new Firebase('https://ozten.firebaseio.com/');
@@ -149,3 +173,8 @@ function get_gravatar(email, size) {
     return 'http://www.gravatar.com/avatar/' + MD5(email) + '.jpg?s=' + size;
     }
 </script>
+
+<style>
+#authrequired, #collectprofile, #welcomeback { width: 50%; float: left;}
+#commentform { width: 50%; float: right;}
+</style>
