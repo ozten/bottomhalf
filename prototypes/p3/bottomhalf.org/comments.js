@@ -41,9 +41,11 @@ var existingComments = [
 ];
 
 var ccss = '<style>';
-ccss += '.signinrequired { border: solid 1px grey; width: 300px; padding: 20px; margin: 0px 10px 10px; float: left;}';
+ccss += '.welcomeback { position: relative; border: solid 1px grey; width: 120px; padding: 20px; margin: 0px 10px 10px; float: left;}';
+ccss += '.welcomebackform { background-color: #ddd;}; form { height: 300px; }';
+ccss += '.notme { margin-top: 70px }';
 ccss += '.author { text-align: center; position: absolute; left: 0px; top: 0px; width: 140px; border: solid 1px grey;} ';
-ccss += 'textarea, input[type=submit] {background-color: #ccc}';
+//ccss += '.author img {margin-left: 30px; }';
 ccss += '.name { display: block; }';
 ccss += '.message { position: absolute; left: 150px; height: 120px; } ';
 ccss += '.comment { clear: both; border: solid 1px grey; margin-bottom: 20px; padding: 10px; position: relative; top: 0px; left: 0px; height: 120px;} ';
@@ -52,9 +54,12 @@ ccss += '.reply { position: absolute; left: 150px; bottom: 10px; } ';
 ccss += '</style>';
 
 var chtml = '<div id="bottom-half-comment-form"><h3>Comments</h3><p>There are 4 comments. Join the conversation</p>';
-chtml += '<div class="signinrequired">You must <bold>Sign in</bold> to leave a comment. <a href="#"><img src="http://localhost:8000/email_sign_in_blue.png" /></a></div>';
-chtml += '<form><textarea disabled="disabled" rows="7" cols="40"></textarea>';
-chtml += '<input disabled="disabled" type="submit" name="reply" value="Reply" /></form>';
+chtml += '<div class="welcomebackform"><div class="welcomeback"><div class="author"><img ';
+chtml += 'src="https://secure.gravatar.com/avatar/3021c2acfc5b98b6dfe2d0ec26432ce1?s=140" width="60" height="60" />';
+chtml += '<a href="http://carter.io"><span class="name">Carter</span></a></div>';
+chtml += '<div class="notme"><a href="#">I want to use a different name</a></div></div>';
+chtml += '<form><p>Welcome back, Carter!</p><textarea rows="7" cols="40"></textarea>';
+chtml += '<input type="submit" name="reply" value="Reply" /></form><br style="clear:both" /></div><hr style="clear: both; margin: 20px 20px" />';
 
 var months = ['', 'Jan', 'Feb'];
 
