@@ -1,5 +1,5 @@
 (function () {
-var bottomHalfBase = 'http://bottomhalf.org/prototypes/p3/bottomhalf.org"';
+var bottomHalfBase = 'http://bottomhalf.org/prototypes/p3/bottomhalf.org';
 document.write('<div id="bottomhalf-comments">Loading Comments</div>');
 
 var existingAuthors = {
