@@ -20,7 +20,7 @@
     <button id="saveprofile">Save Profile</button>
   </form>
 </div>
-<div id="welcomeback">
+<div id="welcomeback"><!-- pre id="debug"></pre -->
   <p>Welcome back, <div class="author"><img class="avatar" src="" /><a href="#" rel="nofollow" class="nolink"><span></span></a></div></p>
   <p><a id="edit-profile" href="#">Edit Profile</a></p>
   <p>or <a id="logout" href="">Sign Out</a> to use a different profile.</p>
@@ -38,7 +38,15 @@
         src='https://cdn.firebase.com/v0/firebase-auth-client.js'>
 </script>
 <script type='text/javascript' src='https://cdn.firebase.com/v0/firebase.js'></script>
+<script type='text/javascript' src="js/jschannel.js"></script>
 <script type='text/javascript'>
+var chan = Channel.build({
+  window: window.parent,
+  origin: '*',
+  scope: 'comments'
+});
+
+/* Profile */
 var base = 'https://ozten.firebaseio.com/';
 var chatRef = new Firebase(base);
 
@@ -50,7 +58,7 @@ function populateProfile(name, avatarUrl, homepage) {
       .removeClass('nolink');
   }
 }
-
+var userId;
 window.authClient = new FirebaseAuthClient(chatRef, function(error, user) {
   if (error) {
     // an error occurred while attempting login
@@ -59,9 +67,12 @@ window.authClient = new FirebaseAuthClient(chatRef, function(error, user) {
     showAuthRequired();
   } else if (user) {
     // user authenticated with Firebase
-    $('p span').html('<pre>' + JSON.stringify(user, null, 4) + '</pre>');    
+    userId = user.id;
+    $('#debug').html(JSON.stringify(user, null, 4));    
+    $('#collectprofile input[name=id]').val(user.id);
+    $('#collectprofile input[name=email]').val(user.email);
 
-    var key = base + 'user/profile/' + user.hash;
+    var key = base + 'user/profile/' + user.id;
     var profileRef = new Firebase(key);
     profileRef.on('value', function(snapshot) {
       var profile = snapshot.val();
@@ -69,8 +80,6 @@ window.authClient = new FirebaseAuthClient(chatRef, function(error, user) {
         populateProfile(profile.name, profile.avatarUrl, profile.homepage);
         showWelcomeBack();
       } else {
-        $('#collectprofile input[name=id]').val(user.hash);
-        $('#collectprofile input[name=email]').val(user.email);
         showCollectProfile();
       }
     });
@@ -112,7 +121,6 @@ function enableComments(should) {
   } else {
     $('#commentform textarea').attr('readonly', 'true')
     $('#commentform input').attr('disabled', 'disabled');
-console.log('setup', $('#commentform textarea'));
   }
 }
 function showAuthRequired() {
@@ -144,21 +152,71 @@ $('#logout').click(function(e) {
   authClient.logout();
 });
 
-var myRootRef = new Firebase('https://ozten.firebaseio.com/');
+/* Comments */
+function sanitize(id) {
+  return id.replace(/[.:/?#]/g, ',');
+}
+function getWebsiteHash() {
+  return sanitize(window.location.toString());
+}
+function getPageHash() {
+  return sanitize(window.location.toString());
+}
 
+var websiteId = getWebsiteHash();
+var pageId = getPageHash();
+var key = base + 'site/' + websiteId + '/p/' + pageId + '/comments';
 
-function printChatMessage(name, text) {
-/*        $('<div/>').text(text).prepend($('<em/>').text(name+': ')).appendTo($('#messagesDiv'));
-        $('#messagesDiv')[0].scrollTop = $('#messagesDiv')[0].scrollHeight;
+var authors = {};
 
-*/
-};
+var commentRef = new Firebase(key);
 
-myRootRef.on('child_added', function(snapshot) {
-  var message = snapshot.val();
-  printChatMessage(message.name, message.text); 
+commentRef.on('value', function(snapshot) {
+  var comments = snapshot.val();
+console.log('Getting some comments', comments);
+  if (comments && Object.keys(comments)) {
+    Object.keys(comments).forEach(function(key) {
+      console.log('AUTHOR: ', comments[key].author);
+      var authorId = comments[key].author;
+      if (!authors[authorId]) {
+        var authorRef = new Firebase(base + 'user/profile/' + authorId);
+        authorRef.once('value', function(snapshot) {
+          authors[authorId] = snapshot.val();
+          authors[authorId]['id'] = authorId;
+          chan.call({
+            method: 'showAuthor',
+            params: authors[authorId],
+            success: function(v) { console.log('showAuthor success', v); }
+          });
+        });
+      }
+      comments[key]['id'] = key;
+      chan.call({
+        method: 'showComment',
+        params: comments[key],
+        success: function(v) {console.log('success', v);}
+      });
+    });
+  }
 });
 
+$('#commentform form').submit(function(e) {
+  e.preventDefault();
+console.log('asdfadsfasdfdsf');
+
+console.log(key);
+
+  commentRef.push({
+    message: $('#commentform textarea').val(),
+    author: userId,
+    created: new Date().getTime()
+  }, function(err, val) {
+    console.log(err, val);
+  });
+  return false;
+});
+
+/* Gravatar */
 
 //http://www.deluxeblogtips.com/2010/04/get-gravatar-using-only-javascript.html
 function get_gravatar(email, size) {
