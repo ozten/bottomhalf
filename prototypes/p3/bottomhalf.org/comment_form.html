@@ -1,7 +1,10 @@
 <html>
-
+<style>
+#authrequired, #collectprofile, #welcomeback { display: none; }
+</style>
 <div id="authrequired">
-  <button id="signin">Sign in</button>
+  <p>You must sign in to BottomHalf.org to leave comments. </p>
+  <p><a id="signin" href="#"><img src="email_sign_in_blue.png" /></a></p>
 </div>
 <div id="collectprofile">
   <form>
@@ -89,7 +92,7 @@ window.authClient = new FirebaseAuthClient(chatRef, function(error, user) {
   }
 });
 
-$('#authrequired button').click(function (e) {
+$('#authrequired #signin').click(function (e) {
   window.authClient.login('persona');
 });
 $('#collectprofile button').click(function (e) {
