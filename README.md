@@ -1,9 +1,11 @@
 # BottomHalf
 A Persona powered commenting service for webpages
 
+![Screenshot of comments](design/screenshots/comments627x356.jpg)
+
 ## Elevator Pitch
 
-Persona based comments for the web!
+<img src="design/screenshots/kittenblog250x300.jpg" width="250" height="300" alt="Kitten blog" align="left" /> Persona based comments for the web!
 
 Add a commenting system to your webpage with a single line of JavaScript.
 
@@ -16,6 +18,8 @@ into their Facebook Identity on your site.
 As a reader, you get a fast and easy way to comment on the web.
 
 Sane defaults inhibit spam, trolls, and reward your genuine audience.
+
+
 
 ## Get Involved
 
