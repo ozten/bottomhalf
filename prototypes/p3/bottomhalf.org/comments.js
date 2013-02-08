@@ -50,12 +50,12 @@ ccss += 'iframe { width: 100%; height: 250px; }';
 ccss += '.welcomeback { position: relative; border: solid 1px grey; width: 120px; padding: 20px; margin: 0px 10px 10px; float: left;}';
 ccss += '.welcomebackform { background-color: #ddd;}; form { height: 300px; }';
 ccss += '.notme { margin-top: 70px }';
-ccss += '.author { text-align: center; position: absolute; left: 0px; top: 0px; width: 140px; border: solid 1px grey;} ';
-//ccss += '.author img {margin-left: 30px; }';
-ccss += '.name { display: block; }';
-ccss += '.message { position: absolute; left: 150px; height: 120px; } ';
-ccss += '.comment { clear: both; border: solid 1px grey; margin-bottom: 20px; padding: 10px; position: relative; top: 0px; left: 0px; height: 120px;} ';
-ccss += '.reply { position: absolute; left: 150px; bottom: 10px; } ';
+ccss += '.author { width: 120px; text-align: center; float: left; } ';
+ccss += '.name { display: block; } ';
+ccss += '.posted { float: left; clear: left; } ';
+ccss += '.message { min-height: 100px; } ';
+ccss += '.comment { width: 95%; border: solid 1px #ccc; margin: 10px; padding: 10px; position: relative;} ';
+ccss += '.reply { position: absolute; bottom: 10px; right: 20px;} ';
 
 ccss += '</style>';
 
@@ -103,9 +103,9 @@ var displayComment = function (id, authorId, posted, message) {
   console.log(aId);
   var chtml = '<div><div id="comment' + id + '" class="comment"><div class="author author' + aId + '">';
   chtml += '<div class="a"></div>';
-  chtml += '<div class="posted">on ';
+  chtml += '<div class="posted"><a href="#comment' + id + '" class="permalink">on ';
   chtml += months[d.getMonth()] + ' ' + d.getDay() + 'th at ' + d.getHours() + ':' + d.getMinutes();
-  chtml += '</div>';
+  chtml += '</a></div>';
   chtml += '</div>';
   chtml += '<div class="message">' + message;
   chtml += '</div><div class="reply"><a href="#bottom-half-comment-form">Reply</a></div>';
