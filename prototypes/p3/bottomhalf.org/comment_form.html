@@ -205,9 +205,6 @@ console.log('Getting some comments', comments);
 
 $('#commentform form').submit(function(e) {
   e.preventDefault();
-console.log('asdfadsfasdfdsf');
-
-console.log(key);
 
   commentRef.push({
     message: $('#commentform textarea').val(),
@@ -215,6 +212,7 @@ console.log(key);
     created: new Date().getTime()
   }, function(err, val) {
     console.log(err, val);
+    $('#commentform textarea').val('')
   });
   return false;
 });
