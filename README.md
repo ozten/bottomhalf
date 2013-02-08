@@ -5,7 +5,7 @@ A Persona powered commenting service for webpages
 
 ## Elevator Pitch
 
-<img src="design/screenshots/kittenblog250x300.jpg" width="250" height="300"
+<img src="design/screenshots/kittenblog250x300.jpg" width="229" height="270"
      alt="Kitten blog" align="left" style="margin-right: 15px; margin-bottom: 20px;" /> 
 Persona based comments for the web!
 
