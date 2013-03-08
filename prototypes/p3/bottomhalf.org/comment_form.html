@@ -176,7 +176,7 @@ var commentRef = new Firebase(key);
 
 commentRef.on('value', function(snapshot) {
   var comments = snapshot.val();
-console.log('Getting some comments', comments);
+  console.log('Getting some comments', comments);
   if (comments && Object.keys(comments)) {
     Object.keys(comments).forEach(function(key) {
       console.log('AUTHOR: ', comments[key].author);
@@ -205,13 +205,13 @@ console.log('Getting some comments', comments);
 
 $('#commentform form').submit(function(e) {
   e.preventDefault();
-
+  window.needsScroll = true;
   commentRef.push({
     message: $('#commentform textarea').val(),
     author: userId,
     created: new Date().getTime()
   }, function(err, val) {
-    console.log(err, val);
+    console.log('push callback err=', err, 'val=', val);
     $('#commentform textarea').val('')
   });
   return false;
