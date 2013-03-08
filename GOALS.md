@@ -1,10 +1,6 @@
 # Project Goals
 
 * Spread Persona
-* Provide a fast, lightweight, simple commenting system
-* Low operational overhead
-
-# Anti-Goals
-
-* Innovate in the comment space
-* Create a Disqus or Livefyre competitor
+* Provide a rich, easy to use discussion forum to the web
+* Improve website owner's choises for commenting systems
+* Improve user's ability to discuss and discover new content

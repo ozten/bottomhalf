@@ -1,6 +1,6 @@
 (function () {
 var bottomHalfBase = 'http://bottomhalf.org/prototypes/p3/bottomhalf.org';
-// bottomHalfBase = 'http://localhost:8000';
+bottomHalfBase = 'http://localhost:8000';
 document.write('<div id="bottomhalf-comments">Loading Comments</div>');
 
 var existingAuthors = {
@@ -61,7 +61,7 @@ ccss += '</style>';
 
 
 var chtml = '<div id="bottom-half-comment-form"><h3>Comments</h3><p>There are <span id="number-comments">0</span> comments. Join the conversation</p>';
-chtml += '<iframe id="bh_comments_frame" src="' + bottomHalfBase + '/comment_form.html"></iframe>';
+chtml += '<iframe id="bh_comments_frame" src="' + bottomHalfBase + '/comment_form.html?cache=756298f462cf3b73f143ca7bda559fb3"></iframe>';
 chtml += '<div id="bottom-half-comments-container"></div>';
 
 
